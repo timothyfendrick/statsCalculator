@@ -5,7 +5,7 @@ using namespace std;
 vector<int> getNumbers();
 int findMostFrequentNumber(vector<int> nums);
 int numberGreaterThanAverage(vector<int> nums);
-int greatestCommonDivisor(vector<int> nums);
+int greatestCommonDivisor(vector<int>& nums);
 bool isSorted(vector<int> nums);
 
 int main()
@@ -79,11 +79,11 @@ int greatestCommonDivisor(vector<int>& allNums)
         else if (num1 > num2) 
         {
             vector <int> divisorList = {num1, num2};
-            while (divisorList[divisorList.length()-1] != 0)
+            while (divisorList[divisorList.size()-1] != 0)
             {
-                divisorList.pushback(divisorList[divisorList.length()-1] % divisorList[divisorList.length()-2]);
+                divisorList.pushback(divisorList[divisorList.size()-1] % divisorList[divisorList.size()-2]);
             }
-            gCD = divisorList[divisorList.length()-2];
+            gCD = divisorList[divisorList.size()-2];
         }
         else //if num2 is greater than num1
         {
