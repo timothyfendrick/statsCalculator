@@ -66,7 +66,7 @@ int greatestCommonDivisor(vector<int>& allNums)
         //returns itself
         gCD = allNums[0];
     }
-    if else (allNums.size() < 3)
+    else if (allNums.size() < 3)
     {
         //find the gCD of two numbers
         int num1 = allNums[0];
@@ -81,7 +81,7 @@ int greatestCommonDivisor(vector<int>& allNums)
             vector <int> divisorList = {num1, num2};
             while (divisorList[divisorList.size()-1] != 0)
             {
-                divisorList.pushback(divisorList[divisorList.size()-1] % divisorList[divisorList.size()-2]);
+                divisorList.push_back(divisorList[divisorList.size()-1] % divisorList[divisorList.size()-2]);
             }
             gCD = divisorList[divisorList.size()-2];
         }
