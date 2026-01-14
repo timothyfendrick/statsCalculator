@@ -69,10 +69,32 @@ int greatestCommonDivisor(vector<int>& allNums)
     if else (allNums.size() < 3)
     {
         //find the gCD of two numbers
+        int num1 = allNums[0];
+        int num2 = allNums[1];
+
+        if (num1 == num2) 
+        {
+            gCD = num1;
+        }
+        else if (num1 > num2) 
+        {
+            vector <int> divisorList = {num1, num2};
+            while (divisorList[divisorList.length()-1] != 0)
+            {
+                divisorList.pushback(divisorList[divisorList.length()-1] % divisorList[divisorList.length()-2]);
+            }
+            gCD = divisorList[divisorList.length()-2];
+        }
+        else //if num2 is greater than num1
+        {
+
+        }
+
     }
     else 
     {
-        
+        //loop to find the gCD of all 
+        gCD = 1;
     }
 
     return gCD;
