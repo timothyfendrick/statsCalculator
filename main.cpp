@@ -55,11 +55,27 @@ int numberGreaterThanAverage(vector<int> nums)
     // TODO: Student 2
     return 0;
 }
-//--
-int greatestCommonDivisor(vector<int> nums)
+// returns the greatest common divisor (greatest common factor) between all ints in the given allNums vector
+int greatestCommonDivisor(vector<int>& allNums)
 {
-    // TODO: Student 3
-    return 1;
+    //by default, the greatestCommonDivisor is 1
+    int gCD = 1;
+
+    if (allNums.size() == 1)
+    {
+        //returns itself
+        gCD = allNums[0];
+    }
+    if else (allNums.size() < 3)
+    {
+        //find the gCD of two numbers
+    }
+    else 
+    {
+        
+    }
+
+    return gCD;
 }
 //--
 bool isSorted(vector<int> nums)
