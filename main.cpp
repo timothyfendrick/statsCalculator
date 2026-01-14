@@ -62,16 +62,27 @@ int greatestCommonDivisor(vector<int> nums)
     return 1;
 }
 //--
+/*
+This function outputs true if a list is sorted in either ascending or descending order, and false otherwise.
+*/
 bool isSorted(vector<int>& nums)
 {
     int n = nums.size();
-    // if less than one number, the list is automatically considered sorted
-    if(n > 1) {
+    // if only two numbers (or less), the list is automatically considered sorted
+    if(n > 2) {
+        bool increasing = true;
+        bool decreasing = true;
         for(int i = 0; i < n - 1; i++) {
-            // if previous number is greater, the list is not sorted
+            // if previous number is greater, not increasing
             if(nums[i] > nums[i+1]) {
-                return false;
+                increasing = false;
             }
+            // if previous numver is less, not decreasing
+            if(nums[i] < nums[i+1]) {
+                decreasing = false;
+            }
+
+            if(!increasing && !decreasing) return false;
         }
         // if loop ends, list is sorted
     }
