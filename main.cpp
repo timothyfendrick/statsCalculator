@@ -1,17 +1,22 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
+
 using namespace std;
 
 vector<int> getNumbers();
-int findMostFrequentNumber(vector<int> nums);
+int findMostFrequentNumber(vector<int>& nums);
+int maxUnorderedMap(unordered_map <int, int> &nums);
 int numberGreaterThanAverage(vector<int> nums);
 int greatestCommonDivisor(vector<int> nums);
 bool isSorted(vector<int> nums);
 
 int main()
 {
-    //get the numbers from the user
-    vector<int> numbers = getNumbers();
+    // //get the numbers from the user
+    // vector<int> numbers = getNumbers();
+
+    vector <int> numbers = {};
 
     //process the numbers and print results
     cout<<"Most frequent number: "<<findMostFrequentNumber(numbers)<<endl;
@@ -44,11 +49,49 @@ vector<int> getNumbers()
     return nums;
 }
 //--
-int findMostFrequentNumber(vector<int> nums)
+//Returns most frequent number of a vector
+int findMostFrequentNumber(vector<int>& nums)
 {
+
     // TODO: Student 1
-    return -1;
+    
+    // Map each int to its frequency
+    unordered_map<int, int> frequency;
+
+    for(int i = 0; i < nums.size(); i++){
+        frequency[nums[i]] += 1;
+    }
+
+    return maxUnorderedMap(frequency);
+
 }
+//Returns -1 if map is empty
+//New Helper Function max of unorderedMap for findMostFrequentNumber()
+int maxUnorderedMap(unordered_map <int, int> &nums){
+
+    //Checks if list is empty, because then the iterator line fails and crashes program
+    if(nums.empty()){
+        return -1;
+    }
+
+    //gets first item in unordered_map and then accesses the second(value) item from the pair by dereferencing the pointer
+    int maxNum = nums.begin() -> first;
+    int maxFreq = nums.begin() -> second;
+
+
+    //New piece of iterators I learned for this, next increments the iterator to the next spot
+    //This is important because it skips the first index, making this slightly faster
+    for(auto it = next(nums.begin()) ; it != nums.end(); it++){
+        if(it -> second > maxFreq){
+            maxFreq = it -> second;
+            maxNum = it -> first;
+        }
+    }
+
+    return maxNum;
+}
+
+
 //--
 int numberGreaterThanAverage(vector<int> nums)
 {
