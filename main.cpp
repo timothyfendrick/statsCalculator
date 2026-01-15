@@ -13,10 +13,8 @@ bool isSorted(vector<int> nums);
 
 int main()
 {
-    // //get the numbers from the user
-    // vector<int> numbers = getNumbers();
-
-    vector <int> numbers = {};
+    //get the numbers from the user
+    vector<int> numbers = getNumbers();
 
     //process the numbers and print results
     cout<<"Most frequent number: "<<findMostFrequentNumber(numbers)<<endl;
