@@ -52,7 +52,17 @@ int findMostFrequentNumber(vector<int> nums)
 //--
 int numberGreaterThanAverage(vector<int> nums)
 {
-    // TODO: Student 2
+    // TODO: Joe Monnig
+    int numsTotal = 0;
+    // add all the numbers together
+    for (int i = 0; i < nums.size(); i++) 
+    {
+        numsTotal += nums.at(i);
+        cout << numsTotal << endl;
+    }
+    // divide by size of the vector (gets average)
+    //- using average iterate through the initial vector and find the total numbers larger than the average
+    //- output the count of numbers larger than the average
     return 0;
 }
 //--
