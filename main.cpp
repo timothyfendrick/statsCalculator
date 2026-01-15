@@ -98,8 +98,52 @@ int greatestCommonDivisor(vector<int>& allNums)
     }
     else 
     {
-        //loop to find the gCD of all 
-        gCD = 1;
+        //loop to find the gCD of all nums in the list
+        for (int i = 0; i < allNums.size(); i++)
+        {
+            if (i == 0)
+            {
+                if (allNums[i] > allNums[i+1])
+                {
+                vector <int> divisorList = {allNums[i], allNums[i+1]};
+                while (divisorList[divisorList.size()-1] != 0)
+                {
+                    divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
+                }
+                gCD = divisorList[divisorList.size()-2];
+                }
+                else //if num2 is greater than num1
+                {
+                vector <int> divisorList = {allNums[i+1], allNums[i]};
+                while (divisorList[divisorList.size()-1] != 0)
+                {
+                    divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
+                }
+                gCD = divisorList[divisorList.size()-2];
+                }
+            }
+            else
+            {
+                if (allNums[i] > allNums[i+1])
+                {
+                    vector <int> divisorList = {allNums[i], gCD};
+                    while (divisorList[divisorList.size()-1] != 0)
+                    {
+                        divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
+                    }
+                    gCD = divisorList[divisorList.size()-2];
+                }
+                else //if num2 is greater than num1
+                {
+                    vector <int> divisorList = {gCD, allNums[i]};
+                    while (divisorList[divisorList.size()-1] != 0)
+                    {
+                        divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
+                    }
+                    gCD = divisorList[divisorList.size()-2];
+                }
+            }
+        }
     }
 
     return gCD;
