@@ -81,13 +81,18 @@ int greatestCommonDivisor(vector<int>& allNums)
             vector <int> divisorList = {num1, num2};
             while (divisorList[divisorList.size()-1] != 0)
             {
-                divisorList.push_back(divisorList[divisorList.size()-1] % divisorList[divisorList.size()-2]);
+                divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
             }
             gCD = divisorList[divisorList.size()-2];
         }
         else //if num2 is greater than num1
         {
-
+            vector <int> divisorList = {num2, num1};
+            while (divisorList[divisorList.size()-1] != 0)
+            {
+                divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
+            }
+            gCD = divisorList[divisorList.size()-2];
         }
 
     }
