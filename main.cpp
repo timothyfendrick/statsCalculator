@@ -8,8 +8,10 @@ vector<int> getNumbers();
 int findMostFrequentNumber(const vector<int>& nums);
 int maxUnorderedMap(unordered_map <int, int> &nums);
 int numberGreaterThanAverage(vector<int> nums);
-int greatestCommonDivisor(vector<int> nums);
+int greatestCommonDivisor(const vector<int>& nums);
+int gCDTwoInts(const int& larger, const int& smaller);
 bool isSorted(const vector<int>& nums);
+
 
 int main()
 {
@@ -124,11 +126,75 @@ int numberGreaterThanAverage(vector<int> nums)
     // output the count of numbers larger than the average
     return totalnGTA;
 }
-//--
-int greatestCommonDivisor(vector<int> nums)
+// returns the greatest common divisor (greatest common factor) between all ints in the given allNums vector
+int greatestCommonDivisor(const vector<int>& allNums)
 {
-    // TODO: Student 3
-    return 1;
+    //by default, the greatestCommonDivisor is 1
+    int gCD = 1;
+    if (allNums.size() == 1)
+    {
+        //returns itself
+        gCD = allNums[0];
+    }
+    else if (allNums.size() < 3)
+    {
+        //find the gCD of two numbers
+        int num1 = allNums[0];
+        int num2 = allNums[1];
+
+        if (num1 == num2) 
+        {
+            gCD = num1;
+        }
+        else if (num1 > num2) 
+        {
+            gCD = gCDTwoInts(num1, num2);
+        }
+        else //if num2 is greater than num1
+        {
+            gCD = gCDTwoInts(num2, num1);
+        }
+    }
+    else 
+    {
+        //loop to find the gCD of all nums in the list
+        for (int i = 0; i < allNums.size(); i++)
+        {
+            if (i == 0)
+            {
+                if (allNums[i] > allNums[i+1])
+                {
+                    gCD = gCDTwoInts(allNums[i], allNums[i+1]);
+                }
+                else //if num2 is greater than num1
+                {
+                    gCD = gCDTwoInts(allNums[i+1], allNums[i]);
+                }
+            }
+            else
+            {
+                if (allNums[i] > gCD)
+                {
+                    gCD = gCDTwoInts(allNums[i], gCD);
+                }
+                else //if num2 is greater than num1
+                {
+                    gCD = gCDTwoInts(gCD, allNums[i]);
+                }
+            }
+        }
+    }
+    return gCD;
+}
+//-- Used in greatestCommonDivisor to find the gCD of two ints
+int gCDTwoInts(const int& larger, const int& smaller)
+{
+    vector <int> divisorList = {larger, smaller};
+    while (divisorList[divisorList.size()-1] != 0)
+    {
+        divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
+    }
+    return divisorList[divisorList.size()-2];
 }
 //--
 
