@@ -6,7 +6,7 @@ vector<int> getNumbers();
 int findMostFrequentNumber(vector<int> nums);
 int numberGreaterThanAverage(vector<int> nums);
 int greatestCommonDivisor(vector<int> nums);
-bool isSorted(vector<int>& nums);
+bool isSorted(const vector<int>& nums);
 
 int main()
 {
@@ -62,29 +62,30 @@ int greatestCommonDivisor(vector<int> nums)
     return 1;
 }
 //--
-/*
-This function outputs true if a list is sorted in either ascending or descending order, and false otherwise.
-*/
-bool isSorted(vector<int>& nums)
+
+// This function outputs true if a list is sorted in either ascending or descending order, and false otherwise.
+bool isSorted(const vector<int>& nums)
 {
-    int n = nums.size();
+    int sizeOfNums = nums.size();
     // if only two numbers (or less), the list is automatically considered sorted
-    if(n > 2) {
-        bool increasing = true;
-        bool decreasing = true;
-        for(int i = 0; i < n - 1; i++) {
-            // if previous number is greater, not increasing
+    if(sizeOfNums > 2) {
+        bool ascending = true, descending = true;
+
+        // this loop checks each adjacent pair of numbers and flags when ascending or descending order is not preserved
+        for(int i = 0; i < sizeOfNums - 1; i++) {
+            // if previous number is greater, not ascending order
             if(nums[i] > nums[i+1]) {
-                increasing = false;
+                ascending = false;
             }
-            // if previous numver is less, not decreasing
+            // if previous number is less, not descending order
             if(nums[i] < nums[i+1]) {
-                decreasing = false;
+                descending = false;
             }
 
-            if(!increasing && !decreasing) return false;
+            // if nums has been flagged as both not ascending and not descending, then it is definitely not sorted
+            if(!ascending && !descending) return false;
         }
-        // if loop ends, list is sorted
+        // if we make it to the end of the loop, then either ascending or descending is still true, so nums is sorted
     }
     return true;
 }
