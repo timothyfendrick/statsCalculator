@@ -5,7 +5,8 @@ using namespace std;
 vector<int> getNumbers();
 int findMostFrequentNumber(vector<int> nums);
 int numberGreaterThanAverage(vector<int> nums);
-int greatestCommonDivisor(vector<int>& nums);
+int greatestCommonDivisor(const vector<int>& nums);
+int gCDTwoInts(const int& larger, const int& smaller);
 bool isSorted(vector<int> nums);
 
 int main()
@@ -56,11 +57,10 @@ int numberGreaterThanAverage(vector<int> nums)
     return 0;
 }
 // returns the greatest common divisor (greatest common factor) between all ints in the given allNums vector
-int greatestCommonDivisor(vector<int>& allNums)
+int greatestCommonDivisor(const vector<int>& allNums)
 {
     //by default, the greatestCommonDivisor is 1
     int gCD = 1;
-
     if (allNums.size() == 1)
     {
         //returns itself
@@ -78,23 +78,12 @@ int greatestCommonDivisor(vector<int>& allNums)
         }
         else if (num1 > num2) 
         {
-            vector <int> divisorList = {num1, num2};
-            while (divisorList[divisorList.size()-1] != 0)
-            {
-                divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
-            }
-            gCD = divisorList[divisorList.size()-2];
+            gCD = gCDTwoInts(num1, num2);
         }
         else //if num2 is greater than num1
         {
-            vector <int> divisorList = {num2, num1};
-            while (divisorList[divisorList.size()-1] != 0)
-            {
-                divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
-            }
-            gCD = divisorList[divisorList.size()-2];
+            gCD = gCDTwoInts(num2, num1);
         }
-
     }
     else 
     {
@@ -105,48 +94,37 @@ int greatestCommonDivisor(vector<int>& allNums)
             {
                 if (allNums[i] > allNums[i+1])
                 {
-                vector <int> divisorList = {allNums[i], allNums[i+1]};
-                while (divisorList[divisorList.size()-1] != 0)
-                {
-                    divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
-                }
-                gCD = divisorList[divisorList.size()-2];
+                    gCD = gCDTwoInts(allNums[i], allNums[i+1]);
                 }
                 else //if num2 is greater than num1
                 {
-                vector <int> divisorList = {allNums[i+1], allNums[i]};
-                while (divisorList[divisorList.size()-1] != 0)
-                {
-                    divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
-                }
-                gCD = divisorList[divisorList.size()-2];
+                    gCD = gCDTwoInts(allNums[i+1], allNums[i]);
                 }
             }
             else
             {
                 if (allNums[i] > allNums[i+1])
                 {
-                    vector <int> divisorList = {allNums[i], gCD};
-                    while (divisorList[divisorList.size()-1] != 0)
-                    {
-                        divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
-                    }
-                    gCD = divisorList[divisorList.size()-2];
+                    gCD = gCDTwoInts(allNums[i], gCD);
                 }
                 else //if num2 is greater than num1
                 {
-                    vector <int> divisorList = {gCD, allNums[i]};
-                    while (divisorList[divisorList.size()-1] != 0)
-                    {
-                        divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
-                    }
-                    gCD = divisorList[divisorList.size()-2];
+                    gCD = gCDTwoInts(gCD, allNums[i]);
                 }
             }
         }
     }
-
     return gCD;
+}
+//-- Used in greatestCommonDivisor to find the gCD of two ints
+int gCDTwoInts(const int& larger, const int& smaller)
+{
+    vector <int> divisorList = {larger, smaller};
+    while (divisorList[divisorList.size()-1] != 0)
+    {
+        divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
+    }
+    return divisorList[divisorList.size()-2];
 }
 //--
 bool isSorted(vector<int> nums)
