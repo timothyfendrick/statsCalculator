@@ -5,7 +5,7 @@
 using namespace std;
 
 vector<int> getNumbers();
-int findMostFrequentNumber(vector<int>& nums);
+int findMostFrequentNumber(const vector<int>& nums);
 int maxUnorderedMap(unordered_map <int, int> &nums);
 int numberGreaterThanAverage(vector<int> nums);
 int greatestCommonDivisor(vector<int> nums);
@@ -48,7 +48,7 @@ vector<int> getNumbers()
 }
 //--
 //Returns most frequent number of a vector
-int findMostFrequentNumber(vector<int>& nums)
+int findMostFrequentNumber(const vector<int>& nums)
 {
 
     // TODO: Student 1
