@@ -3,6 +3,7 @@ program
 main
 *.o
 *.out
+*.exe
 
 # CLion
 .idea/
