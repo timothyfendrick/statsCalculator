@@ -6,7 +6,7 @@ using namespace std;
 
 vector<int> getNumbers();
 int findMostFrequentNumber(const vector<int>& nums);
-int maxUnorderedMap(unordered_map <int, int> &nums);
+int maxUnorderedMap(unordered_map <int, int> &nums, const int firstNum);
 int numberGreaterThanAverage(vector<int> nums);
 int greatestCommonDivisor(vector<int> nums);
 bool isSorted(vector<int> nums);
@@ -60,12 +60,14 @@ int findMostFrequentNumber(const vector<int>& nums)
         frequency[nums[i]] += 1;
     }
 
-    return maxUnorderedMap(frequency);
+    return maxUnorderedMap(frequency, nums[0]);
 
 }
 //Returns -1 if map is empty
 //New Helper Function max of unorderedMap for findMostFrequentNumber()
-int maxUnorderedMap(unordered_map <int, int> &nums){
+int maxUnorderedMap(unordered_map <int, int> &nums, const int firstNum){
+
+    int firstNumMap = nums.begin() -> first;
 
     //Checks if list is empty, because then the iterator line fails and crashes program
     if(nums.empty()){
@@ -84,6 +86,10 @@ int maxUnorderedMap(unordered_map <int, int> &nums){
             maxFreq = it -> second;
             maxNum = it -> first;
         }
+    }
+
+    if(maxFreq == 1 && maxNum == firstNumMap){
+        return firstNum;
     }
 
     return maxNum;
