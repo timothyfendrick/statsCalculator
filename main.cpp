@@ -103,7 +103,7 @@ int greatestCommonDivisor(const vector<int>& allNums)
             }
             else
             {
-                if (allNums[i] > allNums[i+1])
+                if (allNums[i] > gCD)
                 {
                     gCD = gCDTwoInts(allNums[i], gCD);
                 }
