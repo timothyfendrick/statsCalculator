@@ -93,8 +93,36 @@ int maxUnorderedMap(unordered_map <int, int> &nums){
 //--
 int numberGreaterThanAverage(vector<int> nums)
 {
-    // TODO: Student 2
-    return 0;
+    int numsTotal = 0;
+    int average = 0;
+    int totalnGTA = 0;
+
+    if (nums.size() > 0)
+    {
+        // add all the numbers together
+        for (int i = 0; i < nums.size(); i++) 
+        {
+            numsTotal += nums.at(i);
+        }
+            
+        // divide by size of the vector (gets average)
+        if (nums.size() >= 1) 
+        {
+            average = numsTotal / (nums.size() - 1); // subtracting 1 for the extra value created by the 0 in nums
+        }
+
+        // using average iterate through the initial vector and find the total numbers larger than the average
+        for (int j = 0; j < nums.size(); j++)
+        {
+            if (nums.at(j) > average)
+            {
+                totalnGTA++;
+            }
+        }
+    }
+
+    // output the count of numbers larger than the average
+    return totalnGTA;
 }
 //--
 int greatestCommonDivisor(vector<int> nums)
