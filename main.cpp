@@ -6,7 +6,7 @@ vector<int> getNumbers();
 int findMostFrequentNumber(vector<int> nums);
 int numberGreaterThanAverage(vector<int> nums);
 int greatestCommonDivisor(vector<int> nums);
-bool isSorted(vector<int> nums);
+bool isSorted(const vector<int>& nums);
 
 int main()
 {
@@ -62,8 +62,30 @@ int greatestCommonDivisor(vector<int> nums)
     return 1;
 }
 //--
-bool isSorted(vector<int> nums)
+
+// This function outputs true if a list is sorted in either ascending or descending order, and false otherwise.
+bool isSorted(const vector<int>& nums)
 {
-    // TODO: Student 4
-    return false;
+    int sizeOfNums = nums.size();
+    // if only two numbers (or less), the list is automatically considered sorted
+    if(sizeOfNums > 2) {
+        bool ascending = true, descending = true;
+
+        // this loop checks each adjacent pair of numbers and flags when ascending or descending order is not preserved
+        for(int i = 0; i < sizeOfNums - 1; i++) {
+            // if previous number is greater, not ascending order
+            if(nums[i] > nums[i+1]) {
+                ascending = false;
+            }
+            // if previous number is less, not descending order
+            if(nums[i] < nums[i+1]) {
+                descending = false;
+            }
+
+            // if nums has been flagged as both not ascending and not descending, then it is definitely not sorted
+            if(!ascending && !descending) return false;
+        }
+        // if we make it to the end of the loop, then either ascending or descending is still true, so nums is sorted
+    }
+    return true;
 }
