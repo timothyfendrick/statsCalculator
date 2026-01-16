@@ -8,8 +8,10 @@ vector<int> getNumbers();
 int findMostFrequentNumber(const vector<int>& nums);
 int maxUnorderedMap(unordered_map <int, int> &nums, const int firstNum);
 int numberGreaterThanAverage(vector<int> nums);
-int greatestCommonDivisor(vector<int> nums);
-bool isSorted(vector<int> nums);
+int greatestCommonDivisor(const vector<int>& nums);
+int gCDTwoInts(const int& larger, const int& smaller);
+bool isSorted(const vector<int>& nums);
+
 
 int main()
 {
@@ -99,18 +101,132 @@ int maxUnorderedMap(unordered_map <int, int> &nums, const int firstNum){
 //--
 int numberGreaterThanAverage(vector<int> nums)
 {
-    // TODO: Student 2
-    return 0;
+    int numsTotal = 0;
+    int average = 0;
+    int totalnGTA = 0;
+
+    if (nums.size() > 0)
+    {
+        // add all the numbers together
+        for (int i = 0; i < nums.size(); i++) 
+        {
+            numsTotal += nums.at(i);
+        }
+            
+        // divide by size of the vector (gets average)
+        if (nums.size() >= 1) 
+        {
+            average = numsTotal / (nums.size() - 1); // subtracting 1 for the extra value created by the 0 in nums
+        }
+
+        // using average iterate through the initial vector and find the total numbers larger than the average
+        for (int j = 0; j < nums.size(); j++)
+        {
+            if (nums.at(j) > average)
+            {
+                totalnGTA++;
+            }
+        }
+    }
+
+    // output the count of numbers larger than the average
+    return totalnGTA;
+}
+// returns the greatest common divisor (greatest common factor) between all ints in the given allNums vector
+int greatestCommonDivisor(const vector<int>& allNums)
+{
+    //by default, the greatestCommonDivisor is 1
+    int gCD = 1;
+    if (allNums.size() == 1)
+    {
+        //returns itself
+        gCD = allNums[0];
+    }
+    else if (allNums.size() < 3)
+    {
+        //find the gCD of two numbers
+        int num1 = allNums[0];
+        int num2 = allNums[1];
+
+        if (num1 == num2) 
+        {
+            gCD = num1;
+        }
+        else if (num1 > num2) 
+        {
+            gCD = gCDTwoInts(num1, num2);
+        }
+        else //if num2 is greater than num1
+        {
+            gCD = gCDTwoInts(num2, num1);
+        }
+    }
+    else 
+    {
+        //loop to find the gCD of all nums in the list
+        for (int i = 0; i < allNums.size(); i++)
+        {
+            if (i == 0)
+            {
+                if (allNums[i] > allNums[i+1])
+                {
+                    gCD = gCDTwoInts(allNums[i], allNums[i+1]);
+                }
+                else //if num2 is greater than num1
+                {
+                    gCD = gCDTwoInts(allNums[i+1], allNums[i]);
+                }
+            }
+            else
+            {
+                if (allNums[i] > gCD)
+                {
+                    gCD = gCDTwoInts(allNums[i], gCD);
+                }
+                else //if num2 is greater than num1
+                {
+                    gCD = gCDTwoInts(gCD, allNums[i]);
+                }
+            }
+        }
+    }
+    return gCD;
+}
+//-- Used in greatestCommonDivisor to find the gCD of two ints
+int gCDTwoInts(const int& larger, const int& smaller)
+{
+    vector <int> divisorList = {larger, smaller};
+    while (divisorList[divisorList.size()-1] != 0)
+    {
+        divisorList.push_back(divisorList[divisorList.size()-2] % divisorList[divisorList.size()-1]);
+    }
+    return divisorList[divisorList.size()-2];
 }
 //--
-int greatestCommonDivisor(vector<int> nums)
+
+// This function outputs true if a list is sorted in either ascending or descending order, and false otherwise.
+bool isSorted(const vector<int>& nums)
 {
-    // TODO: Student 3
-    return 1;
-}
-//--
-bool isSorted(vector<int> nums)
-{
-    // TODO: Student 4
-    return false;
+    int sizeOfNums = nums.size();
+    // if only two numbers (or less), the list is automatically considered sorted
+    if(sizeOfNums > 2) {
+        bool ascending = true, descending = true;
+
+        // this loop checks each adjacent pair of numbers and flags when ascending or descending order is not preserved
+        for(int i = 0; i < sizeOfNums - 1; i++) {
+            // if previous number is greater, not ascending order
+            if(nums[i] > nums[i+1]) {
+                ascending = false;
+            }
+            // if previous number is less, not descending order
+            if(nums[i] < nums[i+1]) {
+                descending = false;
+            }
+
+            // if nums has been flagged as both not ascending and not descending, then it is definitely not sorted
+            if(!ascending && !descending) return false;
+        }
+        // if we make it to the end of the loop, then either ascending or descending is still true, so nums is sorted
+    }
+    return true;
 }
