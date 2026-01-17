@@ -7,7 +7,7 @@ using namespace std;
 vector<int> getNumbers();
 int findMostFrequentNumber(const vector<int>& nums);
 int maxUnorderedMap(unordered_map <int, int> &nums, const int firstNum);
-int numberGreaterThanAverage(vector<int> nums);
+int numberGreaterThanAverage(const vector<int> nums);
 int greatestCommonDivisor(const vector<int>& nums);
 int gCDTwoInts(const int& larger, const int& smaller);
 bool isSorted(const vector<int>& nums);
@@ -99,11 +99,11 @@ int maxUnorderedMap(unordered_map <int, int> &nums, const int firstNum){
 
 
 //--
-int numberGreaterThanAverage(vector<int> nums)
+int numberGreaterThanAverage(const vector<int>& nums)
 {
     int numsTotal = 0;
     int average = 0;
-    int totalnGTA = 0;
+    int totalnGTA = 0; // This tracks the total numbers greater than the average
 
     if (nums.size() > 0)
     {
@@ -116,7 +116,7 @@ int numberGreaterThanAverage(vector<int> nums)
         // divide by size of the vector (gets average)
         if (nums.size() >= 1) 
         {
-            average = numsTotal / (nums.size() - 1); // subtracting 1 for the extra value created by the 0 in nums
+            average = numsTotal / nums.size();
         }
 
         // using average iterate through the initial vector and find the total numbers larger than the average
