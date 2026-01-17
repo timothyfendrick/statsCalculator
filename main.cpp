@@ -7,7 +7,7 @@ using namespace std;
 vector<int> getNumbers();
 int findMostFrequentNumber(const vector<int>& nums);
 int maxUnorderedMap(unordered_map <int, int> &nums, const int firstNum);
-int numberGreaterThanAverage(const vector<int> nums);
+int numberGreaterThanAverage(const vector<int>& nums);
 int greatestCommonDivisor(const vector<int>& nums);
 int gCDTwoInts(const int& larger, const int& smaller);
 bool isSorted(const vector<int>& nums);
